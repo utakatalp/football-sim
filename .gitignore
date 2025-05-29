@@ -1,0 +1,6 @@
+# Binaries
+/bin/
+/bin/*
+# Vendor folder (if ever used)
+/vendor/
+/*.exe
