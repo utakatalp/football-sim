@@ -30,7 +30,7 @@ func SimulateMatch(
 	hhHome := float64(prevResults[m.Home.Name]) // each prior H2H win = +1.0
 	hhAway := float64(prevResults[m.Away.Name])
 
-	// 3) base “attack strength” using ELO + form factors
+	// 3) base "attack strength" using ELO + form factors
 	baseHome := m.Home.ELO + hhHome*0.4
 	baseAway := m.Away.ELO + hhAway*0.4
 
@@ -39,9 +39,10 @@ func SimulateMatch(
 	lambdaHome := baseHome / total * 3.0
 	lambdaAway := baseAway / total * 3.0
 
-	// 5) sample goals
-	homeGoals = samplePoisson(lambdaHome) // overdispersion=0.8
-	awayGoals = samplePoisson(lambdaAway)
+	// 5) sample goals with added randomness
+	homeGoals = samplePoisson(lambdaHome) + rand.Intn(2) // Add randomness
+	awayGoals = samplePoisson(lambdaAway) + rand.Intn(2) // Add randomness
+
 	// updating the structs
 	m.Away.Goals_Against = m.Away.Goals_Against + homeGoals
 	m.Away.Goals_For = m.Away.Goals_For + awayGoals
@@ -49,7 +50,7 @@ func SimulateMatch(
 	m.Home.Goals_Against = m.Home.Goals_Against + awayGoals
 	m.Home.Goals_For = m.Home.Goals_For + homeGoals
 	m.Home.Played++
-
+	// fmt.Printf("%d. Week \n", m.Week)
 	return
 }
 

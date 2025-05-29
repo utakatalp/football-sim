@@ -17,7 +17,7 @@ const (
 	host     = "localhost"
 	port     = 5432
 	user     = "postgres"
-	password = "pw"
+	password = "1234"
 	dbname   = "LeagueSimulator"
 )
 
@@ -35,6 +35,7 @@ func (s *Store) ChampionshipOdds(
 	wins := make(map[int]int, len(teams))
 	for i := 0; i < runs; i++ {
 		champID := s.SimulateChampion(teams, fixtures, startWeek)
+
 		wins[champID]++
 	}
 
@@ -76,7 +77,9 @@ func (s *Store) SimulateChampion(
 
 	// 2) Simulate each remaining week
 	for week := startWeek; week < len(fixtures); week++ {
+
 		for _, m := range fixtures[week] {
+			// fmt.Println("week: ", week)
 			// get head-to-head form if you like:
 			results := s.LoadPreviousMatchScoresBetweenTwoTeam(*m)
 			hg, ag := league.SimulateMatch(m, results)
@@ -115,8 +118,7 @@ func (s *Store) SimulateChampion(
 			bestID = t.ID
 		}
 	}
-	fmt.Printf("%d: %d\n", counter, bestID)
-	counter++
+
 	return bestID
 }
 
@@ -198,7 +200,7 @@ func (s *Store) InsertTeams(teams []*league.Team) error {
 }
 
 func (s *Store) UpdateElo(m *league.Match) error {
-	const K = 8.0
+	const K = 40.0
 	// fetch current Elos
 	homeElo := m.Home.ELO
 	awayElo := m.Away.ELO
