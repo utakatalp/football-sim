@@ -82,6 +82,25 @@ for _, t := range teams {
 }
 ```
 
+## API Endpoints
+
+You can find a complete Postman collection for testing all API endpoints here:
+[Football League Simulator API Collection](https://www.postman.com/cloudy-spaceship-341537/workspace/insiderinternship/collection/41015291-e7debb3c-f691-488f-8076-9f687ea944c5?action=share&creator=41015291)
+
+### Web Interface
+- `GET /` - Shows the league table
+- `GET /champion` - Shows the champion
+- `GET /simulateNextWeek` - Simulates the next week
+- `POST /restart` - Restarts the season
+
+### REST API
+- `GET /API/table` - Returns the league table in JSON format
+- `GET /API/fixture` - Returns the fixture in JSON format
+- `GET /API/getPredictions` - Returns championship predictions
+- `POST /API/simulateNextWeek` - Simulates the next week
+- `GET /API/simulateAll` - Simulates all remaining matches
+- `POST /API/restart` - Restarts the season
+
 ## Database
 
 The application uses PostgreSQL as its database. Here are the main database operations:
@@ -235,21 +254,7 @@ Key features of the migration:
    go run cmd/simulator/main.go
    ```
 
-## API Endpoints
 
-### Web Interface
-- `GET /` - Shows the league table
-- `GET /champion` - Shows the champion
-- `GET /simulateNextWeek` - Simulates the next week
-- `POST /restart` - Restarts the season
-
-### REST API
-- `GET /API/table` - Returns the league table in JSON format
-- `GET /API/fixture` - Returns the fixture in JSON format
-- `GET /API/getPredictions` - Returns championship predictions
-- `POST /API/simulateNextWeek` - Simulates the next week
-- `GET /API/simulateAll` - Simulates all remaining matches
-- `POST /API/restart` - Restarts the season
 
 ## Project Structure
 
